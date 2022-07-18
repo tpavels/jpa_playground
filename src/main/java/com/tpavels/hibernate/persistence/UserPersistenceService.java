@@ -2,6 +2,7 @@ package com.tpavels.hibernate.persistence;
 
 import com.tpavels.hibernate.entity.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,4 +20,16 @@ public class UserPersistenceService {
     public User getById(Long id) {
         return entityManager.find(User.class, id);
     }
+
+    @Transactional
+    public void persist(User user) {
+        entityManager.persist(user);
+    }
+
+    @Transactional
+    public void merge(User user) {
+        entityManager.merge(user);
+    }
+
+
 }

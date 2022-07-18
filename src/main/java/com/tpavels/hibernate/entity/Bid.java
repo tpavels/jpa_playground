@@ -2,27 +2,29 @@ package com.tpavels.hibernate.entity;
 
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import static com.tpavels.hibernate.entity.Item.ID_GENERATOR;
 
 @Entity
 @Immutable
 public class Bid {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = ID_GENERATOR)
     private Long id;
 
     private Long amount;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(insertable = false, updatable = false)
     @Generated(GenerationTime.ALWAYS)
     private LocalDateTime updatedDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdDate;
@@ -39,12 +41,11 @@ public class Bid {
         this.amount = amount;
     }
 
-    public Long getAmount() {
-        return amount;
-    }
-
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

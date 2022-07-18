@@ -16,4 +16,8 @@ public class BidService {
     public Bid getById(String id) {
         return bidPersistenceService.getById(Long.valueOf(id));
     }
+
+    public void save(Bid bid) {
+        bidPersistenceService.persist(bid);
+    }
 }

@@ -1,10 +1,12 @@
 package com.tpavels.hibernate.entity;
 
+import com.tpavels.hibernate.entity.other.AuctionType;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,6 +24,31 @@ public class Item {
     @Column(name = "ITM_NAME")
     private String name;
 
+    @Column(name = "BUYNOW_PRICE", nullable = false)
+    private BigDecimal buyNowPrice;
+
+    @Column(name = "INIT_PRICE", nullable = false)
+    private BigDecimal initialPrice;
+
+    @Enumerated(EnumType.STRING)
+    private AuctionType auctionType = AuctionType.HIGHEST;
+
+    @Type(type = "org.hibernate.type.YesNoType")
+    private boolean verified;
+
+    //    @Temporal(TemporalType.TIMESTAMP) //defaulted by hiber but required by JPA
+    @Column(insertable = false, updatable = false)
+    @Generated(GenerationTime.ALWAYS)
+    private LocalDateTime updatedDate;
+
+    //    @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+
+    public Item() {
+    }
+
     public Long getId() { //not needed for hibernate
         return id;
     }
@@ -33,14 +60,4 @@ public class Item {
     public void setName(String name) {
         this.name = name.startsWith("LOT: ") ? name : "LOT: " + name;
     }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(insertable = false, updatable = false)
-    @Generated(GenerationTime.ALWAYS)
-    private LocalDateTime updatedDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false)
-    @CreationTimestamp
-    private LocalDateTime createdDate;
 }
