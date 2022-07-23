@@ -1,5 +1,7 @@
 package com.tpavels.hibernate.entity.inheritance.tableper;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ import javax.persistence.*;
 //        name = "owner",
 //        column = @Column(name = "CC_OWNER", nullable = false)
 //)
+@ToString(callSuper = true)
 public class TwoCreditCard extends TwoBillingDetails {
 
     private String number;

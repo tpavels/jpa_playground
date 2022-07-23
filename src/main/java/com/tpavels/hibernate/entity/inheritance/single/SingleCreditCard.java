@@ -1,16 +1,19 @@
 package com.tpavels.hibernate.entity.inheritance.single;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("CC")
-public class ThreeCreditCard extends ThreeBillingDetails {
+@ToString(callSuper = true)
+public class SingleCreditCard extends SingleBillingDetails {
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String number;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String expirationMonth;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String expirationYear;
 
     public String getNumber() {

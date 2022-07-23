@@ -1,5 +1,7 @@
 package com.tpavels.hibernate.entity.inheritance.join;
 
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,11 +9,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "CREDIT_ID")
+@ToString(callSuper = true)
 public class JoinCreditCard extends JoinBillingDetails {
 
     @Column(nullable = false)
     private String number;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String expirationMonth;
     @Column(nullable = false)
     private String expirationYear;

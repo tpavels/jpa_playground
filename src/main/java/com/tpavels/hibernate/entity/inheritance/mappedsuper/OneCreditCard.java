@@ -1,5 +1,8 @@
 package com.tpavels.hibernate.entity.inheritance.mappedsuper;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 import static com.tpavels.hibernate.entity.Item.ID_GENERATOR;
@@ -9,10 +12,12 @@ import static com.tpavels.hibernate.entity.Item.ID_GENERATOR;
         name = "owner",
         column = @Column(name = "CC_OWNER", nullable = false)
 )
+@ToString(callSuper = true)
 public class OneCreditCard extends OneBillingDetails {
 
     @Id
     @GeneratedValue(generator = ID_GENERATOR)
+    @Getter
     private Long id;
 
     private String number;

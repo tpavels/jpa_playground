@@ -1,10 +1,5 @@
 package com.tpavels.hibernate.persistence;
 
-import com.tpavels.hibernate.entity.inheritance.join.JoinBillingDetails;
-import com.tpavels.hibernate.entity.inheritance.mappedsuper.OneBillingDetails;
-import com.tpavels.hibernate.entity.inheritance.mappedsuper.OneCreditCard;
-import com.tpavels.hibernate.entity.inheritance.single.ThreeBillingDetails;
-import com.tpavels.hibernate.entity.inheritance.tableper.TwoBillingDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,23 +16,13 @@ public class BillingPersistenceService {
         this.entityManager = entityManager;
     }
 
-    @Transactional
-    public <T extends OneBillingDetails> void createOne(T bd) {
-        entityManager.persist(bd);
+    public <T> T get(Long id, Class<T> clazz) {
+        return entityManager.find(clazz, id);
     }
 
     @Transactional
-    public <T extends TwoBillingDetails> void createTwo(T bd) {
+    public <T> void create(T bd) {
         entityManager.persist(bd);
     }
 
-    @Transactional
-    public <T extends ThreeBillingDetails> void createThree(T bd) {
-        entityManager.persist(bd);
-    }
-
-    @Transactional
-    public <T extends JoinBillingDetails> void createJoin(T bd) {
-        entityManager.persist(bd);
-    }
 }
