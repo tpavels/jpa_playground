@@ -1,4 +1,4 @@
-package com.tpavels.hibernate.entity.inheritance.one;
+package com.tpavels.hibernate.entity.inheritance.mappedsuper;
 
 import javax.persistence.*;
 
